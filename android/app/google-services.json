@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "472630311691",
+    "project_id": "psykitz-891d8",
+    "storage_bucket": "psykitz-891d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472630311691:android:71b6147330b8617d93c00e",
+        "android_client_info": {
+          "package_name": "com.example.psykitz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdXA0gwtlDaIA2t1Kv9J-snvezqU8hMMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
