@@ -18,10 +18,7 @@ class WelcomePage extends GetView<WelcomeController> {
         body: Container(
       height: 100.h,
       width: 100.w,
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage("assets/images/homeimage.png"))),
+      decoration: const BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage("assets/images/homeimage.png"))),
       child: Padding(
         padding: EdgeInsets.only(top: 7.h, left: 5.w, right: 5.w),
         child: Column(
@@ -29,41 +26,26 @@ class WelcomePage extends GetView<WelcomeController> {
           children: [
             Text(
               "Welcome",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: AppFontSizes.superextraLarge,
-                  color: AppColors.lightblue),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.superextraLarge, color: AppColors.lightblue),
             ),
             SizedBox(
               height: 10.h,
             ),
             Text(
               "Dive in",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: AppFontSizes.beyondExtraLarge,
-                  color: AppColors.lightblue),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.beyondExtraLarge, color: AppColors.lightblue),
             ),
             Text(
               "and bring",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: AppFontSizes.beyondExtraLarge,
-                  color: AppColors.lightblue),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.beyondExtraLarge, color: AppColors.lightblue),
             ),
             Text(
               "your ideas",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: AppFontSizes.beyondExtraLarge,
-                  color: AppColors.lightblue),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.beyondExtraLarge, color: AppColors.lightblue),
             ),
             Text(
               "to life! 🤖",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: AppFontSizes.beyondExtraLarge,
-                  color: AppColors.lightblue),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.beyondExtraLarge, color: AppColors.lightblue),
             ),
             SizedBox(
               height: 4.h,
@@ -74,20 +56,17 @@ class WelcomePage extends GetView<WelcomeController> {
                   backgroundColor: AppColors.lightblue,
                 ),
                 onPressed: () async {
-                  if (!await Get.find<BluetoothAppService>()
-                      .checkBlueToothEnabled()) {
+                  if (!await Get.find<BluetoothAppService>().checkBlueToothEnabled()) {
                     OpenBluetoothSettingsDialog.showBluetoothSettingsDialog();
                   } else {
                     // Get.offAll(() => const SelectBluetoothPage());
                     Get.offAll(() => const HomePage());
                   }
+                  // Get.offAll(() => const HomePage());
                 },
                 child: Text(
                   "Continue",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: AppFontSizes.medium,
-                      color: Colors.white),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.medium, color: Colors.white),
                 ))
           ],
         ),

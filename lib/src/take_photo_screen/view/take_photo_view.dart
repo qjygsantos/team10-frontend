@@ -49,10 +49,7 @@ class TakePhotoPage extends GetView<TakePhotoController> {
                 ),
                 Text(
                   "Take a Photo",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: AppFontSizes.superextraLarge,
-                      color: AppColors.lightblue),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.superextraLarge, color: AppColors.lightblue),
                 ),
                 SizedBox(
                   height: 2.h,
@@ -62,10 +59,7 @@ class TakePhotoPage extends GetView<TakePhotoController> {
                   child: Text(
                     "Photograph your flowchart from a top-down perspective to ensure proper identification of the flowchart pieces.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: AppFontSizes.medium,
-                        color: Colors.black),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.medium, color: Colors.black),
                   ),
                 ),
                 SizedBox(
@@ -76,10 +70,7 @@ class TakePhotoPage extends GetView<TakePhotoController> {
                   child: Text(
                     "Supports JPG",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: AppFontSizes.regular,
-                        color: Colors.black),
+                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: AppFontSizes.regular, color: Colors.black),
                   ),
                 ),
                 SizedBox(
@@ -92,10 +83,8 @@ class TakePhotoPage extends GetView<TakePhotoController> {
                     children: [
                       IconButton(
                           onPressed: () async {
-                            if (!await Get.find<BluetoothAppService>()
-                                .checkBlueToothEnabled()) {
-                              OpenBluetoothSettingsDialog
-                                  .showBluetoothSettingsDialog();
+                            if (!await Get.find<BluetoothAppService>().checkBlueToothEnabled()) {
+                              OpenBluetoothSettingsDialog.showBluetoothSettingsDialog();
                             } else {
                               controller.takePhotoFromCamera();
                             }
@@ -107,10 +96,8 @@ class TakePhotoPage extends GetView<TakePhotoController> {
                           )),
                       IconButton(
                           onPressed: () async {
-                            if (!await Get.find<BluetoothAppService>()
-                                .checkBlueToothEnabled()) {
-                              OpenBluetoothSettingsDialog
-                                  .showBluetoothSettingsDialog();
+                            if (!await Get.find<BluetoothAppService>().checkBlueToothEnabled()) {
+                              OpenBluetoothSettingsDialog.showBluetoothSettingsDialog();
                             } else {
                               controller.takePhotoFromGallery();
                             }

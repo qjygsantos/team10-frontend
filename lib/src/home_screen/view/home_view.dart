@@ -142,6 +142,7 @@ class HomePage extends GetView<HomeController> {
                             } else {
                               Get.to(() => const TakePhotoPage());
                             }
+                            // Get.to(() => const TakePhotoPage());
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -9,15 +9,25 @@ import '../../../services/bluetooth_service.dart';
 import '../../../services/open_bluetooth_setting_dialog.dart';
 import '../controller/take_photo_view_image_capture_controller.dart';
 
-class TakePhotoViewImageCapturePage
-    extends GetView<TakePhotoViewImageCaptureController> {
+class TakePhotoViewImageCapturePage extends GetView<TakePhotoViewImageCaptureController> {
   const TakePhotoViewImageCapturePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     Get.put(TakePhotoViewImageCaptureController());
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 5.w),
+              child: GestureDetector(
+                  onTap: () {
+                    controller.cropImage(context: context);
+                  },
+                  child: const Icon(Icons.crop)),
+            )
+          ],
+        ),
         body: SizedBox(
           width: 100.w,
           height: 100.h,
@@ -33,10 +43,7 @@ class TakePhotoViewImageCapturePage
                     children: [
                       Text(
                         "Review Photo",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: AppFontSizes.superextraLarge,
-                            color: AppColors.lightblue),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.superextraLarge, color: AppColors.lightblue),
                       ),
                       SizedBox(
                         height: 2.h,
@@ -52,10 +59,7 @@ class TakePhotoViewImageCapturePage
                             : Container(
                                 height: 60.h,
                                 width: 100.w,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: FileImage(
-                                            File(controller.imagePath.value)))),
+                                decoration: BoxDecoration(image: DecorationImage(image: FileImage(File(controller.imagePath.value)))),
                               )),
                       ),
                       const Expanded(child: SizedBox()),
@@ -65,25 +69,17 @@ class TakePhotoViewImageCapturePage
                           height: 7.h,
                           width: 100.w,
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.lightyellow,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8))),
+                            style: ElevatedButton.styleFrom(backgroundColor: AppColors.lightyellow, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
                             onPressed: () async {
-                              if (!await Get.find<BluetoothAppService>()
-                                  .checkBlueToothEnabled()) {
-                                OpenBluetoothSettingsDialog
-                                    .showBluetoothSettingsDialog();
+                              if (!await Get.find<BluetoothAppService>().checkBlueToothEnabled()) {
+                                OpenBluetoothSettingsDialog.showBluetoothSettingsDialog();
                               } else {
                                 controller.uploadFile();
                               }
                             },
                             child: Text(
                               "Submit",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: AppFontSizes.medium,
-                                  color: AppColors.lightblue),
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.medium, color: AppColors.lightblue),
                             ),
                           ),
                         ),
