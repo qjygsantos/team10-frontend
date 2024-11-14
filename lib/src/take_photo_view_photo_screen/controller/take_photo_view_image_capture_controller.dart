@@ -26,6 +26,24 @@ class TakePhotoViewImageCaptureController extends GetxController {
     super.onInit();
   }
 
+  takePhotoFromCamera() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? photo = await picker.pickImage(source: ImageSource.camera);
+    if (photo != null) {
+      imageCaptured = photo;
+      imagePath.value = photo.path;
+    }
+  }
+
+  takePhotoFromGallery() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? photo = await picker.pickImage(source: ImageSource.gallery);
+    if (photo != null) {
+      imageCaptured = photo;
+      imagePath.value = photo.path;
+    }
+  }
+
 // https://team10-backend.up.railway.app/upload - new endpoint
 // https://handwritten-flowchart-detection-team10-6jxk.onrender.com/upload - old endpoint
   Future<void> uploadFile() async {
@@ -108,6 +126,7 @@ class TakePhotoViewImageCaptureController extends GetxController {
     if (croppedFile != null) {
       log(croppedFile.path);
       imagePath.value = croppedFile.path;
+      imageCaptured = XFile(croppedFile.path);
     }
   }
 }

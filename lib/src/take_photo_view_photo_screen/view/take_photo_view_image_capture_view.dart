@@ -17,15 +17,44 @@ class TakePhotoViewImageCapturePage extends GetView<TakePhotoViewImageCaptureCon
     Get.put(TakePhotoViewImageCaptureController());
     return Scaffold(
         appBar: AppBar(
+          title: Text(
+            "Review Photo",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp, color: Colors.black),
+          ),
           actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 2.w),
+              child: GestureDetector(
+                  onTap: () {
+                    controller.takePhotoFromCamera();
+                  },
+                  child: const Icon(
+                    Icons.photo_camera_outlined,
+                    color: AppColors.lightblue,
+                  )),
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 2.w),
+              child: GestureDetector(
+                  onTap: () {
+                    controller.takePhotoFromGallery();
+                  },
+                  child: const Icon(
+                    Icons.image_outlined,
+                    color: AppColors.lightblue,
+                  )),
+            ),
             Padding(
               padding: EdgeInsets.only(right: 5.w),
               child: GestureDetector(
                   onTap: () {
                     controller.cropImage(context: context);
                   },
-                  child: const Icon(Icons.crop)),
-            )
+                  child: const Icon(
+                    Icons.crop,
+                    color: AppColors.lightblue,
+                  )),
+            ),
           ],
         ),
         body: SizedBox(
@@ -41,10 +70,6 @@ class TakePhotoViewImageCapturePage extends GetView<TakePhotoViewImageCaptureCon
                   )
                 : Column(
                     children: [
-                      Text(
-                        "Review Photo",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.superextraLarge, color: AppColors.lightblue),
-                      ),
                       SizedBox(
                         height: 2.h,
                       ),
@@ -52,17 +77,19 @@ class TakePhotoViewImageCapturePage extends GetView<TakePhotoViewImageCaptureCon
                         padding: EdgeInsets.only(left: 5.w, right: 5.w),
                         child: Obx(() => controller.imagePath.value == ""
                             ? Container(
-                                height: 60.h,
+                                height: 75.h,
                                 width: 100.w,
                                 color: Colors.black,
                               )
                             : Container(
-                                height: 60.h,
+                                height: 75.h,
                                 width: 100.w,
                                 decoration: BoxDecoration(image: DecorationImage(image: FileImage(File(controller.imagePath.value)))),
                               )),
                       ),
-                      const Expanded(child: SizedBox()),
+                      SizedBox(
+                        height: 2.h,
+                      ),
                       Padding(
                         padding: EdgeInsets.only(left: 5.w, right: 5.w),
                         child: SizedBox(
