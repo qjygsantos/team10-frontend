@@ -10,6 +10,7 @@ import '../../../services/open_bluetooth_setting_dialog.dart';
 import '../../select_bluetooth_screen/view/select_another_bluetooth_view.dart';
 import '../controller/success_and_failed_controller.dart';
 import '../dialog/show_code_dialog.dart';
+import 'package:badges/badges.dart' as badge;
 
 class SuccessAndFailedPage extends GetView<SuccessAndFailedController> {
   const SuccessAndFailedPage({super.key});
@@ -48,9 +49,31 @@ class SuccessAndFailedPage extends GetView<SuccessAndFailedController> {
                 onPressed: () {
                   CodeDialog.showCodeDialog();
                 },
-                icon: const Icon(
-                  Icons.code,
-                  color: AppColors.lightblue,
+                icon: Obx(
+                  () => badge.Badge(
+                    showBadge: controller.isPseudoCodeError.value,
+                    badgeContent: const Text("!"),
+                    badgeStyle: const badge.BadgeStyle(badgeColor: Colors.red),
+                    child: const Icon(
+                      Icons.code,
+                      color: AppColors.lightblue,
+                    ),
+                  ),
+                )),
+            IconButton(
+                onPressed: () {
+                  MessageDialog.showMessageDialog(message: controller.errorData.value.isEmpty ? "No errors found" : controller.errorData.value);
+                },
+                icon: Obx(
+                  () => badge.Badge(
+                    showBadge: controller.errorData.value.isNotEmpty,
+                    badgeStyle: const badge.BadgeStyle(badgeColor: Colors.red),
+                    badgeContent: const Text("!"),
+                    child: const Icon(
+                      Icons.bug_report,
+                      color: AppColors.lightblue,
+                    ),
+                  ),
                 )),
             SizedBox(
               width: 3.w,
@@ -107,9 +130,9 @@ class SuccessAndFailedPage extends GetView<SuccessAndFailedController> {
                   padding: EdgeInsets.only(left: 10.w, right: 10.w),
                   child: Obx(
                     () => Text(
-                      controller.status.value == "Success" ? "Your robot is ready to go!" : "Something's not right, try again",
+                      controller.isPseudoCodeError.value || controller.errorData.value.isNotEmpty ? "Lets try drawing our flowchart again." : "Your robot is ready to go!",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.superextraLarge, color: AppColors.lightblue),
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.extraLarge, color: AppColors.lightblue),
                     ),
                   ),
                 ),
@@ -129,7 +152,9 @@ class SuccessAndFailedPage extends GetView<SuccessAndFailedController> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: AppColors.lightyellow, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
                   onPressed: () async {
-                    if (controller.status.value == "Success") {
+                    if (controller.isPseudoCodeError.value || controller.errorData.value.isNotEmpty) {
+                      Get.back();
+                    } else {
                       if (!await Get.find<BluetoothAppService>().checkBlueToothEnabled()) {
                         OpenBluetoothSettingsDialog.showBluetoothSettingsDialog();
                       } else {
@@ -142,13 +167,11 @@ class SuccessAndFailedPage extends GetView<SuccessAndFailedController> {
                           MessageDialog.showMessageDialog(message: "Please select bluetooth device first.");
                         }
                       }
-                    } else {
-                      Get.back();
                     }
                   },
                   child: Obx(
                     () => Text(
-                      controller.status.value == "Success" ? "Submit to Robot" : "Back",
+                      controller.isPseudoCodeError.value || controller.errorData.value.isNotEmpty ? "Retry" : "Submit to Robot",
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: AppFontSizes.medium, color: AppColors.lightblue),
                     ),
                   ),

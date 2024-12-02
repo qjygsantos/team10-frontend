@@ -68,11 +68,12 @@ class TakePhotoViewImageCaptureController extends GetxController {
     log(response.statusCode.toString());
     if (response.statusCode == 200) {
       String res = response.body;
+      log(res);
       var result = jsonDecode(res);
       if (result['status'] == "Success") {
         Get.to(() => const SuccessAndFailedPage(), arguments: {"status": "Success", "result": res});
       } else {
-        MessageDialog.showMessageDialog(message: result['message']);
+        Get.to(() => const SuccessAndFailedPage(), arguments: {"status": "Failed", "result": res});
       }
     } else {
       String res = response.body;
